@@ -14,6 +14,39 @@ import ArrowRight from "../../../assets/arrow-right.png";
 
 import { MostListenedPodcast } from "../../components/mostListenedPodcast";
 import { RecommendedPodcast } from "../../components/recomendedPodcast";
+import { FollowingPodcast } from "../../components/followingPodcast";
+
+import PaddingOnSidesView from "../../hoc/PaddingOnSidesView";
+
+const MOST_LISTENED_DATA = [
+  {
+    id: "0",
+    title: "LUCAS INUTILISMO - Podpah #404",
+    artist: "Flow Podcast",
+    length: "1:24h",
+    timesListened: "407K",
+    timesStarred: "65K",
+  },
+  {
+    id: "1",
+    title: "LUCAS INUTILISMO - Podpah #404",
+    artist: "Flow Podcast",
+    length: "1:24h",
+    timesListened: "407K",
+    timesStarred: "65K",
+  },
+];
+
+const RECOMMENDED_DATA = [
+  {
+    id: "0",
+    artist: "Flow Podcast",
+  },
+  {
+    id: "1",
+    artist: "Flow Podcast",
+  },
+];
 
 export function Home() {
   return (
@@ -37,38 +70,27 @@ export function Home() {
           <Text style={styles.sectionViewTitle}>Em alta</Text>
           <View style={styles.seeMoreView}>
             <Text style={styles.seeMoreText}>ver todos</Text>
-            <Image source={ArrowRight} />
+            <Image style={styles.seeMoreIcon} source={ArrowRight} />
           </View>
         </View>
 
         <FlatList
           horizontal={true}
-          data={[
-            {
-              id: "0",
-              title: "LUCAS INUTILISMO - Podpah #404",
-              artist: "Flow Podcast",
-              length: "1:24h",
-              timesListened: "407K",
-              timesStarred: "65K",
-            },
-            {
-              id: "1",
-              title: "LUCAS INUTILISMO - Podpah #404",
-              artist: "Flow Podcast",
-              length: "1:24h",
-              timesListened: "407K",
-              timesStarred: "65K",
-            },
-          ]}
-          renderItem={({ item }) => (
-            <MostListenedPodcast
-              artist={item.artist}
-              length={item.length}
-              timesListened={item.timesListened}
-              timesStarred={item.timesStarred}
-              title={item.title}
-            />
+          data={MOST_LISTENED_DATA}
+          renderItem={({ item, index }) => (
+            <PaddingOnSidesView
+              data={MOST_LISTENED_DATA}
+              index={index}
+              paddingAmount={24}
+            >
+              <MostListenedPodcast
+                artist={item.artist}
+                length={item.length}
+                timesListened={item.timesListened}
+                timesStarred={item.timesStarred}
+                title={item.title}
+              />
+            </PaddingOnSidesView>
           )}
           ItemSeparatorComponent={() => <View style={styles.separator}></View>}
           keyExtractor={(item) => item.id}
@@ -80,26 +102,64 @@ export function Home() {
           <Text style={styles.sectionViewTitle}>Recomendados</Text>
           <View style={styles.seeMoreView}>
             <Text style={styles.seeMoreText}>ver todos</Text>
-            <Image source={ArrowRight} />
+            <Image style={styles.seeMoreIcon} source={ArrowRight} />
           </View>
         </View>
 
         <FlatList
           horizontal={true}
-          data={[
-            {
-              id: "0",
-              artist: "Flow Podcast",
-            },
-            {
-              id: "1",
-              artist: "Flow Podcast",
-            },
-          ]}
-          renderItem={({ item }) => <RecommendedPodcast artist={item.artist} />}
+          data={RECOMMENDED_DATA}
+          renderItem={({ item, index }) => (
+            <PaddingOnSidesView
+              data={RECOMMENDED_DATA}
+              index={index}
+              paddingAmount={24}
+            >
+              <RecommendedPodcast artist={item.artist} />
+            </PaddingOnSidesView>
+          )}
           ItemSeparatorComponent={() => <View style={styles.separator}></View>}
           keyExtractor={(item) => item.id}
         />
+      </View>
+
+      <View style={[styles.sectionView, { paddingRight: 24 }]}>
+        <View style={[styles.sectionViewFlex, { paddingRight: 0 }]}>
+          <Text style={styles.sectionViewTitle}>Seguindo</Text>
+          <View style={styles.seeMoreView}>
+            <Text style={styles.seeMoreText}>ver todos</Text>
+            <Image style={styles.seeMoreIcon} source={ArrowRight} />
+          </View>
+        </View>
+
+        {[
+          {
+            id: "0",
+            title: "Mano a Mano | Mano Brown recebe Lula",
+            artist: "Mano a Mano",
+            length: "2:03h",
+            releaseDate: "13 de abr. de 2022",
+          },
+          {
+            id: "1",
+            title: "Mano a Mano | Mano Brown recebe Lula",
+            artist: "Mano a Mano",
+            length: "2:03h",
+            releaseDate: "13 de abr. de 2022",
+          },
+        ].map((item, index) => (
+          <View
+            key={item.id}
+            style={{ marginTop: index > 0 ? 24 : 0, marginLeft: 24 }}
+          >
+            <FollowingPodcast
+              artist={item.artist}
+              title={item.title}
+              length={item.length}
+              releaseDate={item.releaseDate}
+            />
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
@@ -135,10 +195,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   sectionView: {
-    paddingLeft: 24,
     paddingVertical: 48,
   },
   sectionViewFlex: {
+    paddingHorizontal: 24,
     marginBottom: 24,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -150,14 +210,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   seeMoreView: {
-    paddingRight: 24,
     flexDirection: "row",
     alignItems: "center",
   },
   seeMoreText: {
     color: "#767676",
-    fontFamily: "spaceGrotesk500",
+    fontFamily: "spaceGrotesk400",
     fontSize: 16,
+  },
+  seeMoreIcon: {
+    marginTop: 4,
+    marginLeft: 6,
   },
   separator: {
     width: 24,
