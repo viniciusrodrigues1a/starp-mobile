@@ -5,9 +5,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Home } from "../pages/home";
 import { Onboarding } from "../pages/onboarding";
+import { TabNavigator } from "../components/tabNavigator";
 
 export type RootStackParamList = {
-  Home: undefined;
+  Dashboard: undefined;
   Onboarding: undefined;
 };
 
@@ -15,11 +16,13 @@ const AppStack = createStackNavigator<RootStackParamList>();
 
 export function Routes() {
   return (
-    <NavigationContainer>
-      <AppStack.Navigator screenOptions={{ headerShown: false }}>
-        <AppStack.Screen name="Onboarding" component={Onboarding} />
-        <AppStack.Screen name="Home" component={Home} />
-      </AppStack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <AppStack.Navigator screenOptions={{ headerShown: false }}>
+          <AppStack.Screen name="Onboarding" component={Onboarding} />
+          <AppStack.Screen name="Dashboard" component={TabNavigator} />
+        </AppStack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
