@@ -16,7 +16,7 @@ const AppStack = createStackNavigator<RootStackParamList>();
 export function Routes() {
   return (
     <NavigationContainer>
-      <AppStack.Navigator headerMode="none">
+      <AppStack.Navigator screenOptions={{ headerShown: false }}>
         <AppStack.Screen name="Onboarding" component={Onboarding} />
         <AppStack.Screen name="Home" component={Home} />
       </AppStack.Navigator>
