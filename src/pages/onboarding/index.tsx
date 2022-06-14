@@ -7,11 +7,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../routes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// @ts-ignore
 import OnboardingImage0 from "../../../assets/onboarding-background-0.png";
-// @ts-ignore
 import OnboardingImage1 from "../../../assets/onboarding-background-1.png";
-// @ts-ignore
 import OnboardingImage2 from "../../../assets/onboarding-background-2.png";
 
 const STORAGE_KEY = "@starp/onboarding-has-been-seen";

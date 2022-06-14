@@ -1,13 +1,9 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 
-// @ts-ignore
 import Star from "../../../assets/star.png";
-// @ts-ignore
 import Headphones from "../../../assets/headphones.png";
-// @ts-ignore
 import Clock from "../../../assets/clock.png";
-// @ts-ignore
 import MoreVertical from "../../../assets/more-vertical.png";
 
 type MostListenedPodcastProps = {

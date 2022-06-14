@@ -19,7 +19,6 @@ type OnboardingProps = {
   imageBackground: ImageSourcePropType;
 };
 
-// @ts-ignore
 import Logo from "../../../assets/logo.png";
 
 export function Onboarding({

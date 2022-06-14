@@ -8,11 +8,8 @@ import {
   StyleSheet,
 } from "react-native";
 
-// @ts-ignore
 import Logo from "../../../assets/logo.png";
-// @ts-ignore
 import Bell from "../../../assets/bell.png";
-// @ts-ignore
 import ArrowRight from "../../../assets/arrow-right.png";
 
 import { MostListenedPodcast } from "../../components/mostListenedPodcast";
