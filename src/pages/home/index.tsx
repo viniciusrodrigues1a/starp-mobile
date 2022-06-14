@@ -13,6 +13,7 @@ import Bell from "../../../assets/bell.png";
 import ArrowRight from "../../../assets/arrow-right.png";
 
 import { MostListenedPodcast } from "../../components/mostListenedPodcast";
+import { RecommendedPodcast } from "../../components/recomendedPodcast";
 
 export function Home() {
   return (
@@ -31,9 +32,9 @@ export function Home() {
         </Text>
       </View>
 
-      <View style={styles.mostListenedView}>
-        <View style={styles.mostListenedViewFlex}>
-          <Text style={styles.mostListenedViewTitle}>Em alta</Text>
+      <View style={styles.sectionView}>
+        <View style={styles.sectionViewFlex}>
+          <Text style={styles.sectionViewTitle}>Em alta</Text>
           <View style={styles.seeMoreView}>
             <Text style={styles.seeMoreText}>ver todos</Text>
             <Image source={ArrowRight} />
@@ -73,6 +74,33 @@ export function Home() {
           keyExtractor={(item) => item.id}
         />
       </View>
+
+      <View style={[styles.sectionView, { paddingVertical: 0 }]}>
+        <View style={styles.sectionViewFlex}>
+          <Text style={styles.sectionViewTitle}>Recomendados</Text>
+          <View style={styles.seeMoreView}>
+            <Text style={styles.seeMoreText}>ver todos</Text>
+            <Image source={ArrowRight} />
+          </View>
+        </View>
+
+        <FlatList
+          horizontal={true}
+          data={[
+            {
+              id: "0",
+              artist: "Flow Podcast",
+            },
+            {
+              id: "1",
+              artist: "Flow Podcast",
+            },
+          ]}
+          renderItem={({ item }) => <RecommendedPodcast artist={item.artist} />}
+          ItemSeparatorComponent={() => <View style={styles.separator}></View>}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -106,17 +134,17 @@ const styles = StyleSheet.create({
     fontFamily: "spaceGrotesk500",
     fontSize: 18,
   },
-  mostListenedView: {
+  sectionView: {
     paddingLeft: 24,
     paddingVertical: 48,
   },
-  mostListenedViewFlex: {
+  sectionViewFlex: {
     marginBottom: 24,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  mostListenedViewTitle: {
+  sectionViewTitle: {
     color: "#FFFFFF",
     fontFamily: "spaceGrotesk500",
     fontSize: 20,
