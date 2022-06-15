@@ -21,14 +21,33 @@ function GetCurrentIcon({
 }
 const Tab = createBottomTabNavigator();
 
+const SCREEN_EXPECTED_COUNT = 4;
+const MAX_WIDTH_BAR_ITEM = `${100 / SCREEN_EXPECTED_COUNT}%`;
+
 const styles = StyleSheet.create({
   barStyle: {
     backgroundColor: "#242424",
     borderTopWidth: 0,
+    height: 80,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: "100%",
+  },
+  itemBarStyle: {},
+  itemBarButton: {
+    paddingVertical: 16,
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  itemBarItem: {
+    paddingVertical: 16,
+    flex: 1,
+    maxWidth: MAX_WIDTH_BAR_ITEM,
     justifyContent: "center",
     alignItems: "center",
   },
-  itemBarStyle: {},
   itemLabelStyle: {
     color: "white",
     marginTop: 8,
@@ -43,6 +62,7 @@ export function TabNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.barStyle,
+        tabBarItemStyle: styles.itemBarItem,
       }}
     >
       <Tab.Screen
@@ -56,24 +76,8 @@ export function TabNavigator() {
               filledIcon={FilledHomeIcon}
             />
           ),
-          tabBarItemStyle: styles.itemBarStyle,
           tabBarLabelStyle: styles.itemLabelStyle,
           tabBarLabel: "Inicio",
-        }}
-      />
-
-      <Tab.Screen
-        name="Explorar"
-        component={() => <Text>Search page</Text>}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <GetCurrentIcon
-              currentState={focused}
-              icon={HomeIcon}
-              filledIcon={FilledHomeIcon}
-            />
-          ),
-          tabBarLabel: "Explorar",
         }}
       />
     </Tab.Navigator>
