@@ -1,10 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image, ImageProps, Text, StyleSheet } from "react-native";
-import { Home } from "../../pages/home";
+import { Image, ImageProps, StyleSheet } from "react-native";
+import { Home } from "../pages/home";
 
-import HomeIcon from "../../../assets/home.png";
-import FilledHomeIcon from "../../../assets/home-filled.png";
+import HomeIcon from "../../assets/home.png";
+import FilledHomeIcon from "../../assets/home-filled.png";
 
 type GetCurrentIconProps = {
   filledIcon: ImageProps;
