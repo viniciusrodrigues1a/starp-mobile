@@ -45,7 +45,7 @@ export function Onboarding() {
   };
 
   const goToHome = () => {
-    navigation.replace("Home");
+    navigation.replace("Dashboard");
   };
 
   const handleLastPageChange = async () => {
