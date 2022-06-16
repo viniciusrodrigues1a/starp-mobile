@@ -3,9 +3,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Home } from "../pages/home";
 import { Onboarding } from "../pages/onboarding";
-import { TabNavigator } from "../components/tabNavigator";
+import { TabNavigator } from "./tabNavigator";
 
 export type RootStackParamList = {
   Dashboard: undefined;
