@@ -7,6 +7,7 @@ import {
   SpaceGrotesk_500Medium as spaceGrotesk500,
 } from "@expo-google-fonts/space-grotesk";
 import { Routes } from "./src/routes";
+import { PlayerProvider } from "./src/contexts/playerContext";
 
 export function App() {
   const [fontsLoaded] = useFonts({
@@ -21,8 +22,10 @@ export function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"dark-content"} />
-      <Routes />
+      <PlayerProvider>
+        <StatusBar barStyle={"dark-content"} />
+        <Routes />
+      </PlayerProvider>
     </SafeAreaView>
   );
 }
