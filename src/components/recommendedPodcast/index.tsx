@@ -1,5 +1,6 @@
-import React from "react";
-import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React from 'react';
+import {Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+
 type RecommendedPodcastProps = {
   image?: string;
   artist: string;
@@ -10,13 +11,13 @@ const _styles = StyleSheet.create({
     flex: 1,
   },
   artistText: {
-    fontFamily: "spaceGrotesk400",
+    fontFamily: 'spaceGrotesk400',
     fontSize: 18,
-    color: "#FFF",
+    color: '#FFF',
   },
 });
 
-export function RecommendedPodcast({ artist, image }: RecommendedPodcastProps) {
+export function RecommendedPodcast({artist, image}: RecommendedPodcastProps) {
   return (
     <TouchableOpacity style={_styles.container}>
       <Image
@@ -27,7 +28,7 @@ export function RecommendedPodcast({ artist, image }: RecommendedPodcastProps) {
           borderRadius: 10,
         }}
         source={{
-          uri: "https://pbs.twimg.com/profile_images/1429922301148008450/DjeYQb1d_400x400.jpg",
+          uri: 'https://pbs.twimg.com/profile_images/1429922301148008450/DjeYQb1d_400x400.jpg',
         }}
       />
       <Text style={_styles.artistText}>{artist}</Text>

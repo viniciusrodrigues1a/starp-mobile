@@ -1,15 +1,14 @@
-import React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
-import { Routes } from "./routes";
-
+import React from 'react';
+import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
 import {
   useFonts,
   SpaceGrotesk_400Regular as spaceGrotesk400,
   SpaceGrotesk_700Bold as spaceGrotesk700,
   SpaceGrotesk_500Medium as spaceGrotesk500,
-} from "@expo-google-fonts/space-grotesk";
+} from '@expo-google-fonts/space-grotesk';
+import {Routes} from './src/routes';
 
-export default function App() {
+export function App() {
   const [fontsLoaded] = useFonts({
     spaceGrotesk400,
     spaceGrotesk700,
@@ -21,9 +20,15 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar />
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <Routes />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
