@@ -1,10 +1,10 @@
-import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image, ImageProps, StyleSheet} from 'react-native';
-import {Home} from '../../pages/home';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Image, ImageProps, StyleSheet } from "react-native";
+import { Home } from "../../pages/home";
 
-import HomeIcon from '../../assets/home.png';
-import FilledHomeIcon from '../../assets/home-filled.png';
+import HomeIcon from "../../assets/home.png";
+import FilledHomeIcon from "../../assets/home-filled.png";
 
 type GetCurrentIconProps = {
   filledIcon: ImageProps;
@@ -12,7 +12,11 @@ type GetCurrentIconProps = {
   currentState: boolean;
 };
 
-function GetCurrentIcon({filledIcon, icon, currentState}: GetCurrentIconProps) {
+function GetCurrentIcon({
+  filledIcon,
+  icon,
+  currentState,
+}: GetCurrentIconProps) {
   return <Image source={currentState ? filledIcon : icon} />;
 }
 const Tab = createBottomTabNavigator();
@@ -22,30 +26,30 @@ const MAX_WIDTH_BAR_ITEM = `${100 / SCREEN_EXPECTED_COUNT}%`;
 
 const styles = StyleSheet.create({
   barStyle: {
-    backgroundColor: '#242424',
+    backgroundColor: "#242424",
     borderTopWidth: 0,
     height: 80,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    width: '100%',
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: "100%",
   },
   itemBarStyle: {},
   itemBarButton: {
     paddingVertical: 16,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "center",
     flex: 1,
   },
   itemBarItem: {
     paddingVertical: 16,
     flex: 1,
     maxWidth: MAX_WIDTH_BAR_ITEM,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   itemLabelStyle: {
-    color: 'white',
+    color: "white",
     marginTop: 8,
   },
 });
@@ -59,12 +63,13 @@ export function TabNavigator() {
         headerShown: false,
         tabBarStyle: styles.barStyle,
         tabBarItemStyle: styles.itemBarItem,
-      }}>
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <GetCurrentIcon
               currentState={focused}
               icon={HomeIcon}
@@ -72,7 +77,7 @@ export function TabNavigator() {
             />
           ),
           tabBarLabelStyle: styles.itemLabelStyle,
-          tabBarLabel: 'Inicio',
+          tabBarLabel: "Inicio",
         }}
       />
     </Tab.Navigator>

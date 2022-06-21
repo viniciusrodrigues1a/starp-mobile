@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-import MoreVertical from '../../assets/more-vertical.png';
+import MoreVertical from "../../assets/more-vertical.png";
 
 type FollowingPodcastProps = {
   image?: string;
@@ -15,32 +15,32 @@ type FollowingPodcastProps = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   contentFlex: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   titleText: {
-    fontFamily: 'spaceGrotesk500',
+    fontFamily: "spaceGrotesk500",
     fontSize: 14,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     marginBottom: 4,
-    width: '85%',
+    width: "85%",
   },
   genericText: {
-    fontFamily: 'spaceGrotesk400',
+    fontFamily: "spaceGrotesk400",
     fontSize: 12,
-    color: '#767676',
+    color: "#767676",
   },
   midContentTextWrapper: {
-    width: '80%',
+    width: "80%",
     marginBottom: 4,
   },
   textWrapper: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });
 
@@ -62,7 +62,7 @@ export function FollowingPodcast({
             marginRight: 16,
           }}
           source={{
-            uri: 'https://www.folhadaregiao.com.br/wp-content/uploads/2021/08/PodcastManoBrownDIVULGACAO.jpg',
+            uri: "https://www.folhadaregiao.com.br/wp-content/uploads/2021/08/PodcastManoBrownDIVULGACAO.jpg",
           }}
         />
         <View style={styles.textWrapper}>
@@ -73,7 +73,7 @@ export function FollowingPodcast({
               {artist} • {length}
             </Text>
           </View>
-          <Text style={[styles.genericText, {fontFamily: 'spaceGrotesk500'}]}>
+          <Text style={[styles.genericText, { fontFamily: "spaceGrotesk500" }]}>
             {releaseDate}
           </Text>
         </View>

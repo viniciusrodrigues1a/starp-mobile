@@ -1,17 +1,17 @@
-import React, {useEffect, useRef, useState, useCallback} from 'react';
-import ViewPager from 'react-native-pager-view';
-import {View, StyleSheet} from 'react-native';
-import {Onboarding as OnboardingComponent} from '../../components/onboarding';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../routes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import ViewPager from "react-native-pager-view";
+import { View, StyleSheet } from "react-native";
+import { Onboarding as OnboardingComponent } from "../../components/onboarding";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../routes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import OnboardingImage0 from '../../assets/onboarding-background-0.png';
-import OnboardingImage1 from '../../assets/onboarding-background-1.png';
-import OnboardingImage2 from '../../assets/onboarding-background-2.png';
+import OnboardingImage0 from "../../assets/onboarding-background-0.png";
+import OnboardingImage1 from "../../assets/onboarding-background-1.png";
+import OnboardingImage2 from "../../assets/onboarding-background-2.png";
 
-const STORAGE_KEY = '@starp/onboarding-has-been-seen';
+const STORAGE_KEY = "@starp/onboarding-has-been-seen";
 
 export function Onboarding() {
   const [shouldRender, setShouldRender] = useState(false);
@@ -19,7 +19,7 @@ export function Onboarding() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const goToHome = useCallback(() => {
-    navigation.replace('Dashboard');
+    navigation.replace("Dashboard");
   }, [navigation]);
 
   useEffect(() => {

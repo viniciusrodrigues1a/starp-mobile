@@ -1,11 +1,11 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-import Star from '../../assets/star.png';
-import Headphones from '../../assets/headphones.png';
-import Clock from '../../assets/clock.png';
-import MoreVertical from '../../assets/more-vertical.png';
+import Star from "../../assets/star.png";
+import Headphones from "../../assets/headphones.png";
+import Clock from "../../assets/clock.png";
+import MoreVertical from "../../assets/more-vertical.png";
 
 type MostListenedPodcastProps = {
   title: string;
@@ -22,25 +22,26 @@ export function MostListenedPodcast({
   timesListened,
   timesStarred,
   title,
-  image = 'https://i.ytimg.com/vi/kU4ZEyWVwn8/maxresdefault.jpg',
+  image = "https://i.ytimg.com/vi/kU4ZEyWVwn8/maxresdefault.jpg",
 }: MostListenedPodcastProps) {
   return (
     <TouchableOpacity style={styles.container}>
       <LinearGradient
-        colors={['#141414', '#050505']}
-        start={{x: 1, y: 0}}
-        end={{x: 0, y: 1}}
-        style={styles.content}>
+        colors={["#141414", "#050505"]}
+        start={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={styles.content}
+      >
         <View style={styles.topContent}>
           <Image
             style={{
-              width: '30%',
-              height: 'auto',
+              width: "30%",
+              height: "auto",
               marginRight: 16,
               borderRadius: 10,
             }}
             source={{
-              uri: 'https://i.ytimg.com/vi/kU4ZEyWVwn8/maxresdefault.jpg',
+              uri: "https://i.ytimg.com/vi/kU4ZEyWVwn8/maxresdefault.jpg",
             }}
           />
           <View>
@@ -78,49 +79,49 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: '#141414',
-    borderColor: '#333333',
+    backgroundColor: "#141414",
+    borderColor: "#333333",
     borderWidth: 1,
     borderRadius: 10,
     padding: 24,
   },
   topContent: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
     marginBottom: 16,
   },
   titleText: {
     marginBottom: 4,
-    fontFamily: 'spaceGrotesk400',
+    fontFamily: "spaceGrotesk400",
     fontSize: 18,
-    color: '#FFF',
+    color: "#FFF",
     flexShrink: 1,
-    width: '80%',
+    width: "80%",
   },
   artistText: {
     marginBottom: 4,
-    fontFamily: 'spaceGrotesk500',
+    fontFamily: "spaceGrotesk500",
     fontSize: 12,
-    color: '#767676',
+    color: "#767676",
   },
   footerContent: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   footerText: {
-    color: '#767676',
-    fontFamily: 'spaceGrotesk500',
+    color: "#767676",
+    fontFamily: "spaceGrotesk500",
     fontSize: 12,
     marginLeft: 8,
   },
   relatedInformationsContent: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   relatedInformationsItem: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginRight: 16,
   },
 });

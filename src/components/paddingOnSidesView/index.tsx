@@ -1,5 +1,5 @@
-import React from 'react';
-import {View} from 'react-native';
+import React from "react";
+import { View } from "react-native";
 
 type PaddingOnSidesViewProps = {
   children: React.ReactNode;
@@ -20,7 +20,8 @@ export function PaddingOnSidesView({
         flex: 1,
         paddingLeft: index == 0 ? paddingAmount : 0,
         paddingRight: index == data.length - 1 ? paddingAmount : 0,
-      }}>
+      }}
+    >
       {children}
     </View>
   );
