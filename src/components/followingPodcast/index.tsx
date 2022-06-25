@@ -10,6 +10,7 @@ type FollowingPodcastProps = {
   artist: string;
   length: string;
   releaseDate: string;
+  onPress: () => void;
 };
 
 const styles = StyleSheet.create({
@@ -50,9 +51,10 @@ export function FollowingPodcast({
   length,
   releaseDate,
   image,
+  onPress,
 }: FollowingPodcastProps) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.contentFlex}>
         <Image
           style={{

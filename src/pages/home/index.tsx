@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,15 @@ import {
   ScrollView,
   FlatList,
   StyleSheet,
+  TouchableOpacity,
+  Animated,
 } from "react-native";
 
 import Logo from "../../assets/logo.png";
 import Bell from "../../assets/bell.png";
 import ArrowRight from "../../assets/arrow-right.png";
 import Play from "../../assets/play.png";
+import Pause from "../../assets/pause-gray.png";
 
 import { MostListenedPodcast } from "../../components/mostListenedPodcast";
 import { RecommendedPodcast } from "../../components/recommendedPodcast";
@@ -50,7 +53,16 @@ const RECOMMENDED_DATA = [
 ];
 
 export function Home() {
-  const { isPlayerOpen } = usePlayer();
+  const { isPlaying, isPlayerOpen, play, pause, percentageElapsed } =
+    usePlayer();
+
+  function handlePlayButton() {
+    if (isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+  }
 
   return (
     <>
@@ -93,6 +105,7 @@ export function Home() {
                   timesListened={item.timesListened}
                   timesStarred={item.timesStarred}
                   title={item.title}
+                  onPress={() => play("9b147cb9-cc4f-4080-baf4-8d84afe061c5")}
                 />
               </PaddingOnSidesView>
             )}
@@ -183,9 +196,19 @@ export function Home() {
                 </Text>
                 <Text style={styles.playerInfoArtist}>Mano a Mano</Text>
               </View>
-              <Image style={styles.playerIconImg} source={Play} />
+              <TouchableOpacity onPress={handlePlayButton}>
+                <Image
+                  style={styles.playerIconImg}
+                  source={isPlaying ? Pause : Play}
+                />
+              </TouchableOpacity>
             </View>
-            <View style={styles.playerProgress} />
+            <Animated.View
+              style={[
+                styles.playerProgress,
+                { width: `${percentageElapsed}%` },
+              ]}
+            />
           </View>
         </View>
       )}
@@ -288,7 +311,7 @@ const styles = StyleSheet.create({
     color: "#767676",
   },
   playerProgress: {
-    width: "100%",
+    width: "0%",
     height: 2,
     backgroundColor: "#D9D9D9",
     position: "absolute",

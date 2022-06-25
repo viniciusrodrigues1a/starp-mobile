@@ -4,6 +4,7 @@ import { Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 type RecommendedPodcastProps = {
   image?: string;
   artist: string;
+  onPress: () => void;
 };
 
 const _styles = StyleSheet.create({
@@ -17,9 +18,13 @@ const _styles = StyleSheet.create({
   },
 });
 
-export function RecommendedPodcast({ artist, image }: RecommendedPodcastProps) {
+export function RecommendedPodcast({
+  artist,
+  image,
+  onPress,
+}: RecommendedPodcastProps) {
   return (
-    <TouchableOpacity style={_styles.container}>
+    <TouchableOpacity style={_styles.container} onPress={onPress}>
       <Image
         style={{
           width: 120,

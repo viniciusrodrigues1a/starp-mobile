@@ -8,6 +8,7 @@ import {
 } from "@expo-google-fonts/space-grotesk";
 import { Routes } from "./src/routes";
 import { PlayerProvider } from "./src/contexts/playerContext";
+import { QueueProvider } from "./src/contexts/queueContext";
 
 export function App() {
   const [fontsLoaded] = useFonts({
@@ -22,10 +23,12 @@ export function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <PlayerProvider>
-        <StatusBar barStyle={"dark-content"} />
-        <Routes />
-      </PlayerProvider>
+      <QueueProvider>
+        <PlayerProvider>
+          <StatusBar barStyle={"dark-content"} />
+          <Routes />
+        </PlayerProvider>
+      </QueueProvider>
     </SafeAreaView>
   );
 }
