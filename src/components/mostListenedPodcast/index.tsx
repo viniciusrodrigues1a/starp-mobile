@@ -54,15 +54,15 @@ export function MostListenedPodcast({
         <View style={styles.footerContent}>
           <View style={styles.relatedInformationsContent}>
             <View style={styles.relatedInformationsItem}>
-              <Image source={Clock} />
+              <Image style={styles.iconImage} source={Clock} />
               <Text style={styles.footerText}>{length}</Text>
             </View>
             <View style={styles.relatedInformationsItem}>
-              <Image source={Headphones} />
+              <Image style={styles.iconImage} source={Headphones} />
               <Text style={styles.footerText}>{timesListened}</Text>
             </View>
             <View style={styles.relatedInformationsItem}>
-              <Image source={Star} />
+              <Image style={styles.iconImage} source={Star} />
               <Text style={styles.footerText}>{timesStarred}</Text>
             </View>
           </View>
@@ -125,5 +125,9 @@ const styles = StyleSheet.create({
   relatedInformationsItem: {
     flexDirection: "row",
     marginRight: 16,
+  },
+  iconImage: {
+    width: 16,
+    height: 16,
   },
 });
