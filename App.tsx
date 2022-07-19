@@ -25,7 +25,7 @@ export function App() {
     <SafeAreaView style={styles.container}>
       <QueueProvider>
         <PlayerProvider>
-          <StatusBar barStyle={"dark-content"} />
+          <StatusBar barStyle={"dark-content"} backgroundColor="#141414" />
           <Routes />
         </PlayerProvider>
       </QueueProvider>
