@@ -162,7 +162,7 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
   const pause = useCallback(async () => {
     if (!(await _isSoundLoaded())) return;
 
-    await playbackObjectRef.current.stopAsync();
+    await playbackObjectRef.current.setStatusAsync({ shouldPlay: false });
   }, [_isSoundLoaded]);
 
   const seek = useCallback(
