@@ -16,16 +16,18 @@ type OnboardingProps = {
   description: string;
   stepValue: number;
   handleNextStep: (stepValue: number) => void;
+  handleSkip: () => void;
   imageBackground: ImageSourcePropType;
 };
 
 import Logo from "../../assets/logo.png";
 
-export function Onboarding({
+export function OnboardingStep({
   description,
   stepValue,
   title,
   handleNextStep,
+  handleSkip,
   imageBackground,
 }: OnboardingProps) {
   const screenHeight =
@@ -44,8 +46,8 @@ export function Onboarding({
         style={[styles.headerContent, { height: sixtyPercentScreenHeight }]}
       >
         <View style={styles.headerFlex}>
-          <Image source={Logo} width={24} height={24} />
-          <TouchableOpacity>
+          <Image source={Logo} style={styles.headerImage} />
+          <TouchableOpacity onPress={handleSkip}>
             <Text style={styles.skipButton}>Pular</Text>
           </TouchableOpacity>
         </View>
@@ -97,6 +99,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  headerImage: {
+    width: 24,
+    height: 24,
+  },
   skipButton: {
     fontSize: 18,
     fontWeight: "400",
@@ -116,13 +122,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 23,
   },
-  backgroundArea: {},
   mainContent: {
     paddingLeft: 24,
     paddingRight: 24,
     paddingTop: 48,
     paddingBottom: 48,
     justifyContent: "space-between",
+    backgroundColor: "#fafafa",
   },
   textWrapper: {
     width: "80%",

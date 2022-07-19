@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ViewPager from "react-native-pager-view";
 import { View, StyleSheet } from "react-native";
-import { Onboarding as OnboardingComponent } from "../../components/onboarding";
+import { OnboardingStep } from "../../components/onboarding-step";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../routes";
@@ -18,9 +18,7 @@ export function Onboarding() {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const goToHome = useCallback(() => {
-    navigation.replace("Dashboard");
-  }, [navigation]);
+  const goToHome = () => navigation.replace("Dashboard");
 
   useEffect(() => {
     (async () => {
@@ -60,29 +58,32 @@ export function Onboarding() {
   return (
     <ViewPager style={styles.container} initialPage={0} ref={pagerRef}>
       <View key="1" style={styles.container}>
-        <OnboardingComponent
+        <OnboardingStep
           title="starp."
           description="Escute seus podcasts favoritos e conheça novas histórias."
           stepValue={1}
           handleNextStep={handlePageChange}
+          handleSkip={handleLastPageChange}
           imageBackground={OnboardingImage0}
         />
       </View>
       <View key="2" style={styles.container}>
-        <OnboardingComponent
+        <OnboardingStep
           title="starp."
           description="Aprenda novas coisas com milhares de personalidades."
           stepValue={2}
           handleNextStep={handlePageChange}
+          handleSkip={handleLastPageChange}
           imageBackground={OnboardingImage1}
         />
       </View>
       <View key="3" style={styles.container}>
-        <OnboardingComponent
+        <OnboardingStep
           title="starp."
           description="Descubra os podcasts em alta e fique por dentro dos assuntos do momento."
           stepValue={3}
           handleNextStep={handleLastPageChange}
+          handleSkip={handleLastPageChange}
           imageBackground={OnboardingImage2}
         />
       </View>
