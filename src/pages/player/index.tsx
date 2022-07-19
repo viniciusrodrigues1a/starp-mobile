@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Slider } from "@miblanchard/react-native-slider";
 
@@ -12,12 +12,38 @@ import JumpForward from "../../assets/jump-forward.png";
 import JumpBackward from "../../assets/jump-backward.png";
 import Play from "../../assets/play.png";
 import Pause from "../../assets/pause.png";
+import { usePlayer } from "../../contexts/playerContext";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../routes";
 
 export function Player() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const {
+    play,
+    pause,
+    isPlaying,
+    timeElapsed,
+    timeElapsedInMillis,
+    totalTime,
+    totalTimeInMillis,
+    seek,
+    seek10SecondsForward,
+    seek10SecondsBackward,
+  } = usePlayer();
+
+  const goBack = () => navigation.goBack();
+  const handlePlayButton = () => (isPlaying ? pause() : play());
+  const handleJumpForward = () => seek10SecondsForward();
+  const handleJumpBackward = () => seek10SecondsBackward();
+  const handleSliderComplete = (value: number) => seek(Math.floor(value));
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       <View style={styles.header}>
-        <Image source={ArrowDown} />
+        <TouchableOpacity onPress={goBack}>
+          <Image source={ArrowDown} />
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.markAsListened}>
           <Text style={styles.markAsListenedText}>Marcar como ouvido</Text>
@@ -44,13 +70,14 @@ export function Player() {
 
         <View style={styles.progressBar}>
           <View style={styles.progressBarLabels}>
-            <Text style={styles.progressBarLabelText}>31:23</Text>
-            <Text style={styles.progressBarLabelText}>1:24:02</Text>
+            <Text style={styles.progressBarLabelText}>{timeElapsed}</Text>
+            <Text style={styles.progressBarLabelText}>{totalTime}</Text>
           </View>
           <Slider
-            value={100}
+            value={timeElapsedInMillis}
             minimumValue={0}
-            maximumValue={200}
+            maximumValue={totalTimeInMillis}
+            onSlidingComplete={handleSliderComplete}
             minimumTrackTintColor="#FFFFFF"
             thumbTintColor="#FFFFFF"
             maximumTrackTintColor="#767676"
@@ -62,15 +89,21 @@ export function Player() {
             <Image source={Star} style={styles.controlButtonImage} />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleJumpBackward}>
             <Image source={JumpBackward} style={styles.controlButtonImage} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.playButton}>
-            <Image source={Pause} style={styles.controlButtonImage} />
+          <TouchableOpacity
+            style={styles.playButton}
+            onPress={handlePlayButton}
+          >
+            <Image
+              source={isPlaying ? Pause : Play}
+              style={styles.controlButtonImage}
+            />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleJumpForward}>
             <Image source={JumpForward} style={styles.controlButtonImage} />
           </TouchableOpacity>
 

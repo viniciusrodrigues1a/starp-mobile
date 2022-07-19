@@ -18,6 +18,12 @@ type PlayerContextData = {
   pause: () => Promise<void>;
   percentageElapsed: number;
   timeElapsed: string;
+  timeElapsedInMillis: number;
+  totalTime: string;
+  totalTimeInMillis: number;
+  seek: (seekToMillis: number) => Promise<void>;
+  seek10SecondsForward: () => void;
+  seek10SecondsBackward: () => void;
 };
 
 const PlayerContext = createContext({} as PlayerContextData);
@@ -38,6 +44,9 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
   const [timeElapsed, setTimeElapsed] = useState(
     millisToHumanReadableFormat(0)
   );
+  const [timeElapsedInMillis, setTimeElapsedInMillis] = useState(0);
+  const [totalTime, setTotalTime] = useState(millisToHumanReadableFormat(0));
+  const [totalTimeInMillis, setTotalTimeInMillis] = useState(0);
 
   /* =========== */
   /*  Internals  */
@@ -86,6 +95,14 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
   const _timeElapsedCallback = useCallback((status: AVPlaybackStatus) => {
     if (status.isLoaded) {
       setTimeElapsed(millisToHumanReadableFormat(status.positionMillis));
+      setTimeElapsedInMillis(status.positionMillis);
+    }
+  }, []);
+
+  const _totalTimeCallback = useCallback((status: AVPlaybackStatus) => {
+    if (status.isLoaded && status.durationMillis) {
+      setTotalTime(millisToHumanReadableFormat(status.durationMillis));
+      setTotalTimeInMillis(status.durationMillis);
     }
   }, []);
 
@@ -103,6 +120,7 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
       _isPlayingCallback(status);
       _percentageElapsedCallback(status);
       _timeElapsedCallback(status);
+      _totalTimeCallback(status);
       _didFinishCallback(status);
     });
   }, [
@@ -147,6 +165,25 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
     await playbackObjectRef.current.stopAsync();
   }, [_isSoundLoaded]);
 
+  const seek = useCallback(
+    async (seekToMillis: number) => {
+      if (!(await _isSoundLoaded())) return;
+
+      await playbackObjectRef.current.setStatusAsync({
+        positionMillis: seekToMillis,
+      });
+    },
+    [_isSoundLoaded]
+  );
+
+  const seek10SecondsForward = useCallback(() => {
+    seek(timeElapsedInMillis + 1000 * 10);
+  }, [seek, timeElapsedInMillis]);
+
+  const seek10SecondsBackward = useCallback(() => {
+    seek(timeElapsedInMillis - 1000 * 10);
+  }, [seek, timeElapsedInMillis]);
+
   return (
     <PlayerContext.Provider
       value={{
@@ -156,6 +193,12 @@ export function PlayerProvider({ children }: PlayerProviderProps) {
         pause,
         percentageElapsed,
         timeElapsed,
+        timeElapsedInMillis,
+        totalTime,
+        totalTimeInMillis,
+        seek,
+        seek10SecondsForward,
+        seek10SecondsBackward,
       }}
     >
       {children}
