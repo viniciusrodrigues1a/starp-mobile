@@ -1,7 +1,11 @@
 import React from "react";
+import { View } from "react-native";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer, Theme } from "@react-navigation/native";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
 
 import { Onboarding } from "../pages/onboarding";
 import { TabNavigator } from "./tabNavigator";
@@ -18,11 +22,19 @@ const AppStack = createStackNavigator<RootStackParamList>();
 export function Routes() {
   return (
     <>
-      <NavigationContainer>
+      <NavigationContainer
+        theme={{ colors: { background: "#141414" } } as Theme}
+      >
         <AppStack.Navigator screenOptions={{ headerShown: false }}>
           <AppStack.Screen name="Onboarding" component={Onboarding} />
           <AppStack.Screen name="Dashboard" component={TabNavigator} />
-          <AppStack.Screen name="Player" component={Player} />
+          <AppStack.Screen
+            name="Player"
+            component={Player}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+            }}
+          />
         </AppStack.Navigator>
       </NavigationContainer>
     </>
