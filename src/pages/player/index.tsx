@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Slider } from "@miblanchard/react-native-slider";
 
@@ -17,6 +17,8 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../routes";
 
+let seekDebounce: any = null;
+
 export function Player() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const {
@@ -28,15 +30,41 @@ export function Player() {
     totalTime,
     totalTimeInMillis,
     seek,
-    seek10SecondsForward,
-    seek10SecondsBackward,
   } = usePlayer();
+
+  const [seekDebouncedTimes, setSeekDebouncedTimes] = useState(0);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(seekDebounce);
+      seekDebounce = null;
+    };
+  }, []);
 
   const goBack = () => navigation.goBack();
   const handlePlayButton = () => (isPlaying ? pause() : play());
-  const handleJumpForward = () => seek10SecondsForward();
-  const handleJumpBackward = () => seek10SecondsBackward();
   const handleSliderComplete = (value: number) => seek(Math.floor(value));
+
+  const debounce = (fn: () => void) => {
+    clearTimeout(seekDebounce);
+    setSeekDebouncedTimes((prev) => prev + 1);
+    seekDebounce = setTimeout(() => {
+      fn();
+      setSeekDebouncedTimes(0);
+    }, 250);
+  };
+
+  const handleJumpForward = () => {
+    debounce(() =>
+      seek(timeElapsedInMillis + 1000 * 10 * (seekDebouncedTimes || 1))
+    );
+  };
+
+  const handleJumpBackward = () => {
+    debounce(() =>
+      seek(timeElapsedInMillis - 1000 * 10 * (seekDebouncedTimes || 1))
+    );
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -77,7 +105,7 @@ export function Player() {
             value={timeElapsedInMillis}
             minimumValue={0}
             maximumValue={totalTimeInMillis}
-            onSlidingComplete={handleSliderComplete}
+            onSlidingComplete={(val) => handleSliderComplete(val as number)}
             minimumTrackTintColor="#FFFFFF"
             thumbTintColor="#FFFFFF"
             maximumTrackTintColor="#767676"
