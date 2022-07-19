@@ -21,6 +21,9 @@ import { RecommendedPodcast } from "../../components/recommendedPodcast";
 import { FollowingPodcast } from "../../components/followingPodcast";
 import { PaddingOnSidesView } from "../../components/paddingOnSidesView";
 import { usePlayer } from "../../contexts/playerContext";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../routes";
 
 const MOST_LISTENED_DATA = [
   {
@@ -53,8 +56,13 @@ const RECOMMENDED_DATA = [
 ];
 
 export function Home() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { isPlaying, isPlayerOpen, play, pause, percentageElapsed } =
     usePlayer();
+
+  function goToPlayer() {
+    navigation.navigate("Player");
+  }
 
   function handlePlayButton() {
     if (isPlaying) {
@@ -181,7 +189,7 @@ export function Home() {
       </ScrollView>
 
       {isPlayerOpen && (
-        <View style={styles.player}>
+        <TouchableOpacity style={styles.player} onPress={goToPlayer}>
           <Image
             style={styles.playerImg}
             source={{
@@ -210,7 +218,7 @@ export function Home() {
               ]}
             />
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     </>
   );
