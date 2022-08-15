@@ -2,9 +2,13 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image, ImageProps, StyleSheet } from "react-native";
 import { Home } from "../../pages/home";
+import { ProfileStackNavigator } from "../profileStackNavigator";
 
 import HomeIcon from "../../assets/home.png";
 import FilledHomeIcon from "../../assets/home-filled.png";
+import ProfileIcon from "../../assets/user.png";
+import FilledProfileIcon from "../../assets/user-filled.png";
+import { Profile } from "../../pages/profile";
 
 type GetCurrentIconProps = {
   filledIcon: ImageProps;
@@ -78,6 +82,21 @@ export function TabNavigator() {
           ),
           tabBarLabelStyle: styles.itemLabelStyle,
           tabBarLabel: "Inicio",
+        }}
+      />
+      <Tab.Screen
+        name="ProfileStack"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <GetCurrentIcon
+              currentState={focused}
+              icon={ProfileIcon}
+              filledIcon={FilledProfileIcon}
+            />
+          ),
+          tabBarLabelStyle: styles.itemLabelStyle,
+          tabBarLabel: "Perfil",
         }}
       />
     </Tab.Navigator>
