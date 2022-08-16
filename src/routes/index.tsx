@@ -21,22 +21,18 @@ const AppStack = createStackNavigator<RootStackParamList>();
 
 export function Routes() {
   return (
-    <>
-      <NavigationContainer
-        theme={{ colors: { background: "#141414" } } as Theme}
-      >
-        <AppStack.Navigator screenOptions={{ headerShown: false }}>
-          <AppStack.Screen name="Onboarding" component={Onboarding} />
-          <AppStack.Screen name="Dashboard" component={TabNavigator} />
-          <AppStack.Screen
-            name="Player"
-            component={Player}
-            options={{
-              cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
-            }}
-          />
-        </AppStack.Navigator>
-      </NavigationContainer>
-    </>
+    <NavigationContainer theme={{ colors: { background: "#141414" } } as Theme}>
+      <AppStack.Navigator screenOptions={{ headerShown: false }}>
+        <AppStack.Screen name="Onboarding" component={Onboarding} />
+        <AppStack.Screen name="Dashboard" component={TabNavigator} />
+        <AppStack.Screen
+          name="Player"
+          component={Player}
+          options={{
+            cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+          }}
+        />
+      </AppStack.Navigator>
+    </NavigationContainer>
   );
 }
