@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   pictureView: {
     alignItems: "center",
-    marginTop: 80,
   },
   pictureImage: {
     width: 168,

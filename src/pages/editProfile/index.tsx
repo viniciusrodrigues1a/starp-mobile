@@ -1,6 +1,29 @@
 import React from "react";
-import { Text } from "react-native";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { EditProfilePicture } from "../../components/editProfilePicture";
+import { Input } from "../../components/input";
+import { Header } from "./components/Header";
+
+import { styles } from "./styles";
+
+import User from "../../assets/user.png";
 
 export function EditProfile() {
-  return <Text style={{ color: "#fff" }}>Hello</Text>;
+  return (
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.containerView}
+    >
+      <Header onSavePressed={() => {}} />
+
+      <View style={styles.editProfilePictureView}>
+        <EditProfilePicture title="Mudar de foto" onEditPressed={() => {}} />
+      </View>
+
+      <View style={styles.inputView}>
+        <Input imageSource={User} label="Nome" value="Leo Star" />
+      </View>
+    </ScrollView>
+  );
 }

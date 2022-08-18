@@ -1,15 +1,16 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 
 import { styles } from "./styles";
 
 import { Header } from "./components/Header";
-import { EditProfilePicture } from "./components/EditProfilePicture";
+import { EditProfilePicture } from "../../components/editProfilePicture";
 import { GradientView } from "./components/GradientView";
 import { ProfileEmail } from "./components/ProfileEmail";
 import { UpdateInfo } from "./components/UpdateInfo";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ProfileStackParamList } from "../../routes/profileStackNavigator";
+import { ProfileName } from "./components/ProfileName";
 
 export function Profile() {
   const navigation = useNavigation<NavigationProp<ProfileStackParamList>>();
@@ -17,22 +18,32 @@ export function Profile() {
   const goToEditProfileScreen = () => navigation.navigate("EditProfile");
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <GradientView>
-        <Header onLogoutPressed={() => {}} />
+    <>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <GradientView>
+          <Header onLogoutPressed={() => {}} />
 
-        <EditProfilePicture onEditPressed={goToEditProfileScreen} />
-      </GradientView>
+          <View style={styles.editProfilePictureView}>
+            <EditProfilePicture
+              title="Editar perfil"
+              onEditPressed={goToEditProfileScreen}
+            />
+          </View>
 
-      <View style={styles.paddingView}>
-        <ProfileEmail />
+          <ProfileName name="Leo Star" />
+        </GradientView>
 
-        <UpdateInfo title="Alterar senha" onButtonPressed={() => {}} />
-        <UpdateInfo
-          title="Alterar gêneros favoritos"
-          onButtonPressed={() => {}}
-        />
-      </View>
-    </ScrollView>
+        <View style={styles.paddingView}>
+          <ProfileEmail />
+
+          <UpdateInfo title="Alterar senha" onButtonPressed={() => {}} />
+          <UpdateInfo
+            title="Alterar gêneros favoritos"
+            onButtonPressed={() => {}}
+          />
+        </View>
+      </ScrollView>
+      <StatusBar barStyle={"dark-content"} backgroundColor="#0D0D0D" />
+    </>
   );
 }

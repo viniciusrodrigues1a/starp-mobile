@@ -5,9 +5,13 @@ import { styles } from "./styles";
 
 type EditProfilePictureProps = {
   onEditPressed: () => void;
+  title: string;
 };
 
-export function EditProfilePicture({ onEditPressed }: EditProfilePictureProps) {
+export function EditProfilePicture({
+  onEditPressed,
+  title,
+}: EditProfilePictureProps) {
   return (
     <>
       <View style={styles.pictureView}>
@@ -16,11 +20,9 @@ export function EditProfilePicture({ onEditPressed }: EditProfilePictureProps) {
           style={styles.editPictureButton}
           onPress={onEditPressed}
         >
-          <Text style={styles.editPictureButtonText}>Editar perfil</Text>
+          <Text style={styles.editPictureButtonText}>{title}</Text>
         </TouchableOpacity>
       </View>
-
-      <Text style={styles.profileNameText}>Leo Star</Text>
     </>
   );
 }
