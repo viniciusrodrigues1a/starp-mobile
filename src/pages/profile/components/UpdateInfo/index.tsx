@@ -11,7 +11,11 @@ type UpdateInfoProps = {
 
 export function UpdateInfo({ title, onButtonPressed }: UpdateInfoProps) {
   return (
-    <TouchableOpacity style={styles.containerView}>
+    <TouchableOpacity
+      hitSlop={{ left: 10, bottom: 10, right: 10, top: 10 }}
+      style={styles.containerView}
+      onPress={onButtonPressed}
+    >
       <Text style={styles.titleText}>{title}</Text>
       <Image source={ArrowRight} style={styles.arrowImage} />
     </TouchableOpacity>

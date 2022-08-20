@@ -17,6 +17,7 @@ export function Profile() {
 
   const goToEditProfileScreen = () => navigation.navigate("EditProfile");
   const goToEditEmailScreen = () => navigation.navigate("EditEmail");
+  const goToEditPasswordScreen = () => navigation.navigate("EditPassword");
 
   return (
     <>
@@ -35,12 +36,12 @@ export function Profile() {
         </GradientView>
 
         <View style={styles.paddingView}>
-          <ProfileEmail
-            hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
-            onPress={goToEditEmailScreen}
-          />
+          <ProfileEmail onPress={goToEditEmailScreen} />
 
-          <UpdateInfo title="Alterar senha" onButtonPressed={() => {}} />
+          <UpdateInfo
+            title="Alterar senha"
+            onButtonPressed={goToEditPasswordScreen}
+          />
           <UpdateInfo
             title="Alterar gêneros favoritos"
             onButtonPressed={() => {}}
