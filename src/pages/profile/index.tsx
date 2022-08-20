@@ -16,6 +16,7 @@ export function Profile() {
   const navigation = useNavigation<NavigationProp<ProfileStackParamList>>();
 
   const goToEditProfileScreen = () => navigation.navigate("EditProfile");
+  const goToEditEmailScreen = () => navigation.navigate("EditEmail");
 
   return (
     <>
@@ -34,7 +35,10 @@ export function Profile() {
         </GradientView>
 
         <View style={styles.paddingView}>
-          <ProfileEmail />
+          <ProfileEmail
+            hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+            onPress={goToEditEmailScreen}
+          />
 
           <UpdateInfo title="Alterar senha" onButtonPressed={() => {}} />
           <UpdateInfo

@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { EditProfilePicture } from "../../components/editProfilePicture";
 import { Input } from "../../components/input";
-import { Header } from "./components/Header";
+import { HeaderWithSaveButton } from "../../components/headerWithSaveButton";
 
 import { styles } from "./styles";
 
@@ -15,7 +15,7 @@ export function EditProfile() {
       showsVerticalScrollIndicator={false}
       style={styles.containerView}
     >
-      <Header onSavePressed={() => {}} />
+      <HeaderWithSaveButton onSavePressed={() => {}} />
 
       <View style={styles.editProfilePictureView}>
         <EditProfilePicture title="Mudar de foto" onEditPressed={() => {}} />

@@ -3,13 +3,13 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styles";
 
-import ArrowLeft from "../../../../assets/arrow-left.png";
+import ArrowLeft from "../../assets/arrow-left.png";
 
 type HeaderProps = {
   onSavePressed: () => void;
 };
 
-export function Header({ onSavePressed }: HeaderProps) {
+export function HeaderWithSaveButton({ onSavePressed }: HeaderProps) {
   return (
     <View style={styles.containerView}>
       <Image source={ArrowLeft} style={styles.image} />
