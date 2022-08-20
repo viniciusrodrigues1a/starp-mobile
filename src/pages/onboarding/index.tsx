@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ViewPager from "react-native-pager-view";
 import { View, StyleSheet } from "react-native";
-import { OnboardingStep } from "../../components/onboarding-step";
+import { OnboardingStep } from "../../components/onboardingStep";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../routes";
